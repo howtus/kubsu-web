@@ -62,11 +62,11 @@
                     4
                 </label>
                 <label class="radio">
-                    <input type="radio" name="limbs" value="4">
+                    <input type="radio" name="limbs" value="6">
                     6
                 </label>
                 <label class="radio">
-                    <input type="radio" name="limbs" value="4">
+                    <input type="radio" name="limbs" value="8">
                     8
                 </label>
             </div>
@@ -76,7 +76,7 @@
             <label for="form-select" class="label">Сверхспособности</label>
             <div class="control">
                 <div class="select is-multiple is-primary">
-                    <select id="form-select" multiple size="3" name="powers">
+                    <select id="form-select" multiple size="3" name="powers[]">
                         <option value="immortality" selected>Бессмертие</option>
                         <option value="levitation">Левитация</option>
                         <option value="walls-walking">Хождение сквозь стены</option>

@@ -9,3 +9,20 @@ header('Content-Type: text/html; charset=UTF-8');
 print_r($_POST);
 
 print('Привет, мир!');
+?>
+
+<html>
+<head>
+	<title>Задание 2</title>
+</head>
+<body>
+	<br>
+	<img src="1.png"><br>
+	<img src="2.png"><br>
+	<img src="3.png"><br>
+	<img src="4.png"><br>
+	<img src="5.png"><br>
+	<img src="6.png"><br>
+	<img src="7.png">
+</body>
+</html>
