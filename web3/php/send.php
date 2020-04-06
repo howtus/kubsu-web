@@ -16,7 +16,15 @@
     $sex = $_POST['sex'];
     $limbs = $_POST['limbs'];
     $bio = $_POST['bio'];
-    $check = $_POST['check'];
+
+    // Костыль
+    if (isset($_POST['check']) && ($_POST['check'] !== null)) {
+        $check = 'on';
+    }
+    else {
+        $check = 'off';
+    }
+
     $powers = array();
     foreach ($_POST['powers'] as $key => $value) {
         $powers[$key] = $value;
