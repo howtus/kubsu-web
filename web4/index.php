@@ -4,61 +4,69 @@ header('Content-Type: text/html; charset=UTF-8');
 if ($_SERVER['REQUEST_METHOD'] == 'GET') {
 
   $messages = array();
+  $messages['save'] = '';
+  $messages['name'] = '';
+  $messages['email'] = '';
+  $messages['powers'] = '';
+  $messages['bio'] = '';
+  $messages['check'] = '';
 
   if (!empty($_COOKIE['save'])) {
     setcookie('save', '', 100000);
-    $messages[] = 'Спасибо, результаты отправлены в базу данных.';
+    $messages['save'] = 'Спасибо, результаты отправлены в базу данных';
   }
+
   if (!empty($_COOKIE['notsave'])) {
-    setcookie('notsave', '', 100000);
-    $messages[] = 'Ошибка отправления в базу данных.';
+      setcookie('notsave', '', 100000);
+      $messages['save'] = 'Ошибка отправления в базу данных.';
   }
 
   $errors = array();
   $errors['name'] = empty($_COOKIE['name_error']) ? '' : $_COOKIE['name_error'];
-  $errors['email'] = !empty($_COOKIE['email_error']);
-  $errors['powers'] = !empty($_COOKIE['powers_error']);
-  $errors['bio'] = !empty($_COOKIE['bio_error']);
-  $errors['check'] = !empty($_COOKIE['check_error']);
+  $errors['email'] = empty($_COOKIE['email_error']) ? '' : $_COOKIE['email_error'];
+  $errors['powers'] = empty($_COOKIE['powers_error']) ? '' : $_COOKIE['powers_error'];
+  $errors['bio'] = empty($_COOKIE['bio_error']) ? '' : $_COOKIE['bio_error'];
+  $errors['check'] = empty($_COOKIE['check_error']) ? '' : $_COOKIE['check_error'];
 
   // name error print
   if ($errors['name'] == 'null') {
     setcookie('name_error', '', 100000);
-    $messages[] = '<div>Заполните имя.</div>';
+    $messages['name'] = 'Заполните имя';
   }
   else if ($errors['name'] == 'incorrect') {
       setcookie('name_error', '', 100000);
-      $messages[] = '<div>Недопустимые символы. Введите имя заново.</div>';
+      $messages['name'] = 'Недопустимые символы. Введите имя заново';
   }
 
   // email error print
   if ($errors['email']) {
     setcookie('email_error', '', 100000);
-    $messages[] = '<div>Заполните почту.</div>';
+    $messages['email'] = 'Заполните почту';
   }
 
   // powers error print
   if ($errors['powers']) {
     setcookie('powers_error', '', 100000);
-    $messages[] = '<div>Выберите хотя бы одну сверхспособность.</div>';
+    $messages['powers'] = 'Выберите хотя бы одну сверхспособность';
   }
 
   if ($errors['bio']) {
     setcookie('bio_error', '', 100000);
-    $messages[] = '<div>Напишите что-нибудь о себе.</div>';
+    $messages['bio'] = 'Напишите что-нибудь о себе';
   }
 
   if ($errors['check']) {
     setcookie('check_error', '', 100000);
-    $messages[] = '<div>Вы не можете отправить форму не согласившись с контрактом.</div>';
+    $messages['check'] = 'Вы не можете отправить форму не согласившись с контрактом';
   }
 
   // Складываем предыдущие значения полей в массив, если есть.
   $values = array();
   $powers = array();
-  $powers['levit'] = "Левитация";
-  $powers['tp'] = "Телепортация";
-  $powers['walk'] = "Хождение сквозь стены";
+  $powers['immortality'] = "Бессмертие";
+  $powers['levitation'] = "Левитация";
+  $powers['walls-walking'] = "Хождение сквозь стены";
+
   $values['name'] = empty($_COOKIE['name_value']) ? '' : $_COOKIE['name_value'];
   $values['email'] = empty($_COOKIE['email_value']) ? '' : $_COOKIE['email_value'];
   $values['year'] = empty($_COOKIE['year_value']) ? '' : $_COOKIE['year_value'];
@@ -205,3 +213,4 @@ else {
   // Делаем перенаправление.
   header('Location: index.php');
 }
+?>
