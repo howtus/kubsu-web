@@ -1,7 +1,7 @@
 <html lang="ru">
   <head>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Задание 5</title>
+    <title>Задание 5 | Мешари Д.</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.2/css/bulma.min.css">
     <link rel="stylesheet" href="style.css">
   </head>

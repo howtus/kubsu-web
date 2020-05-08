@@ -15,3 +15,16 @@ INSERT INTO app (name, email, age, sex, limbs, powers, bio) VALUES ("Diana", "ex
 INSERT INTO app (name, email, age, sex, limbs, powers, bio) VALUES ("Martin", "martin228@gmail.com", 1955, "male", 6, "super, duper", "I'm from the USA!");
 
 INSERT INTO app VALUES (0, "user", "email@email.com", 2000, "male", 4, "test power", "biography");
+
+CREATE TABLE web6 (
+    login varchar(255) NOT NULL,
+    pass varchar(255) NOT NULL,
+    name varchar(255) NOT NULL,
+    email varchar(255) NOT NULL,
+    year int(4) UNSIGNED NOT NULL,
+    sex varchar(6) NOT NULL,
+    limbs int(1) UNSIGNED NOT NULL,
+    powers varchar(255) NOT NULL,
+    bio varchar(255) NOT NULL,
+    PRIMARY KEY (login)
+);
