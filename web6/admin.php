@@ -22,6 +22,11 @@ if (empty($_SERVER['PHP_AUTH_USER']) ||
 $db_user = 'u16347';   // Логин БД
 $db_pass = '5403462';  // Пароль БД
 
+// Используем метод Double Submit Cookie отсюда https://habr.com/ru/post/318748/
+// Создаем токен и помещаем его в куки, а также в input формы.
+$token = md5('web7' . $_SERVER['PHP_AUTH_USER']);
+setcookie('token', $token, time() + 24 * 60 * 60);
+
 // Подключаемся к базе данных на сервере.
 $db = new PDO('mysql:host=localhost;dbname=u16347', $db_user, $db_pass, array(
     PDO::ATTR_PERSISTENT => true
@@ -30,6 +35,7 @@ $db = new PDO('mysql:host=localhost;dbname=u16347', $db_user, $db_pass, array(
 // Если метод был POST, значит мы нажали на кнопку удаления.
 // Пробуем удалить запись из базы данных.
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+  if ($_POST['token'] === $_COOKIE['token']) {
     try {
         $stmt = $db->prepare('DELETE FROM web6 WHERE login = ?');
         $stmt->execute(array(
@@ -39,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         echo 'Ошибка: ' . $e->getMessage();
         exit();
     }
+  }
 }
 
 try {
@@ -52,6 +59,7 @@ try {
     </head>
     <body>
     <form action="" method="post">
+      <input type="hidden" name="token" value="<?php print($token); ?>">
         <table class="table is-hoverable is-fullwidth">
             <thead>
             <tr>
@@ -72,9 +80,11 @@ try {
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 print('<tr>');
                 foreach ($row as $cell) {
-                    print('<td>' . $cell . '</td>');
+                    print('<td>' . strip_tags($cell) . '</td>');
                 }
-                print('<td><button class="button is-small is-danger is-light" name="remove" type="submit" value="' . $row['login'] . '">x</button></td>');
+                print('<td><button class="button is-info is-small is-danger is-light" name="remove" type="submit" value="'
+                  . strip_tags($row['login'])
+                  . '">x</button></td>');
                 print('</tr>');
             }
             ?>
